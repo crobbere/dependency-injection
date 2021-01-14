@@ -1,18 +1,19 @@
 package gipsy.springframework.dependencyinjection.controllers;
 
 import gipsy.springframework.dependencyinjection.services.GreetingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
-
 @Controller
-public class PropertyInjectedController {
-    @Qualifier("propertyInjectedGreetingService")
-    @Autowired
-    public GreetingService greetingService;
+public class I18nController {
 
-    public String getGreeting(){
+    private final GreetingService greetingService;
+
+    public I18nController(@Qualifier("i18nService") GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
+
+    public String sayHello(){
         return greetingService.sayGreeting();
     }
 }
