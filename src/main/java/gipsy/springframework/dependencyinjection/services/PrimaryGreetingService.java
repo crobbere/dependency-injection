@@ -5,9 +5,16 @@ import org.springframework.stereotype.Service;
 
 @Primary
 @Service
-public class PrimaryGreetingService implements GreetingService{
+public class PrimaryGreetingService implements GreetingService {
+
+    private GreetingRepository greetingRepository;
+
+    public PrimaryGreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
+
     @Override
     public String sayGreeting() {
-        return "Hello World from the primary bean";
+        return greetingRepository.getEnglishGreeting();
     }
 }
